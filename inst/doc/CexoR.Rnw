@@ -1,0 +1,107 @@
+%\VignetteIndexEntry{CexoR Vignette }
+%\VignetteDepends{CexoR}
+%\VignetteKeywords{Visualization,ChIPseq,Transcription,Genetics}
+%\VignettePackage{CexoR}
+\documentclass{article}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rcode}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textsf{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\CexoR}{\Rpackage{CexoR}}
+\newcommand{\Rsamtools}{\Rpackage{Rsamtools}}
+
+
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+
+\begin{document}
+
+\title{{ \CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
+\date{July, 2013}
+\author{Pedro Madrigal\footnote{pm@engineering.com}}
+\maketitle
+\begin{center}
+Department of Biometry and Bioinformatics, Institute of Plant Genetics\\Polish Academy of Sciences\\Poznan, Poland
+\end{center}
+
+<<setup, echo=FALSE, results=hide>>=
+options(width=200)
+options(continue=" ")
+options(prompt="R> ")
+@
+
+\section{Introduction}
+For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein- DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
+the identification of protein-DNA binding sites. The midpoint between the strand-specific paired peaks formed at its forward and reverse strands is delimited by the exonuclease stop sites, within the protein binding event is located (Rhee and Pugh, 2011).
+
+\section{Methodology}
+Lambda exonuclease stop site
+(\Robject{5}' end of the reads) counts are calculated separately for both DNA strands from the alignment files in BAM format using the Bioconductor package {\Rsamtools}. Counts are then normalized using linear scaling to the same sample depth of the smaller dataset. Using the Skellam distribution (Skellam, 1946), {\CexoR} models at each nucleotide position the discrete signed difference of two Poisson counts at forward and reverse strands, respectively. Then, detecting nearby located significant count differences of opposed sign (peak-pairs) at both strands allows {\CexoR} to delimit the flanks of the protein binding event location at base pair resolution. A one-sided $p$-value is obtained for each peak using the complementary cumulative Skellam distribution function, and a final $p$-value for the peak-pair (default cut-off $1e-12$) is reported as the sum of the two $p$-values. To account for the reproducibility of replicated peak-pairs, which central point must be located at a user-defined maximum distance, $p$-values are submitted for irreproducible discovery rate estimation (Li et al., 2011). Finally, BED files containing reproducible binding event locations formed within peak-pairs are reported, as well as their midpoints.
+
+
+\section{Example}
+We downloaded the 3 replicates of human CTCF ChIP-exo data from GEO (SRA044886) (Rhee and Pugh, 2011), and aligned the reads to the human reference genome (hg19) using Bowtie 1.0.0. Reads not mapping uniquely were discarded. We then can searched for reproducible binding events between peak-pairs in the first million bp of Chr2 in the 3 biological replicates by:
+
+
+\begin{scriptsize}
+<<Call reproducible peak-pairs in ChIP-exo replicates>>=
+options(width=40)
+## hg19. chr2:1-1,000,000
+
+owd <- setwd(tempdir())
+
+library(CexoR)
+rep1 <- "CTCF_rep1_chr2_1-1e6.bam"
+rep2 <- "CTCF_rep2_chr2_1-1e6.bam"
+rep3 <- "CTCF_rep3_chr2_1-1e6.bam"
+r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
+r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
+r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
+
+peak_pairs <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, N=3e4)
+
+peak_pairs$bindingEvents
+
+peak_pairs$bindingCentres
+
+setwd(owd)
+
+@ 
+\end{scriptsize}
+
+13 reproducible peak-pair events are reported for the established thresholds ($p$-value $\leq 1e-12$, IDR $\leq 0.01$).\\
+
+
+\textbf{Important note}: For the correct estimation of the IDR (Li et al., 2011) peak-pair calling should be relaxed (e.g., $p$-value=1e-3), enabling the noise component be present in the data, therefore allowing the peak-pairs be separated into the reproducible and the irreproducible group. In the example shown above, as the dataset is very small and peaks are highly reproducible, IDR in the overlapped peak-pairs across the 3 replicates is zero. For more information about using IDR in high-throughput sequencing datasets see Land et al. (2012), and Bailey et al. (in press).
+
+
+
+\section{References}
+\begin{itemize}
+\item Bailey TL, et al. (in press). Practical guidelines for the comprehensive analysis of ChIP-seq data. \textbf{PLoS Comput Biol}.
+\item Landt SG, et al. (2012). ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. \textbf{Genome Res} 22: 1813-1831.  
+\item Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. \textbf{J R Stat Soc Ser A} 109: 296.
+\item Madrigal P, et al. (in preparation).
+\item Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. \textbf{Ann Appl Stat} 5: 1752-1779. 
+\item Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. \textbf{Cell} 147: 1408-1419.
+\end{itemize}
+
+\section{Details}
+
+This document was written using:
+
+\begin{scriptsize}
+<<sessionInfo>>=
+sessionInfo()
+@
+\end{scriptsize} 
+
+\end{document}
+
+

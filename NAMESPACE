@@ -1,0 +1,13 @@
+
+exportPattern("^[^\\.]")
+
+
+importFrom(IRanges,IRanges,DataFrame,RangedData, RangesList, Rle,SimpleList,colnames, "colnames<-",coverage,mean)
+importFrom(GenomicRanges,GRanges,coverage,seqlengths,"seqlengths<-",intersect,subsetByOverlaps,values,"values<-",as.data.frame)
+importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList)
+importFrom(rtracklayer,export.bedGraph)
+importFrom(idr,est.IDR)
+
+
+export(cexor)
+
