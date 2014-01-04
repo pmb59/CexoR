@@ -1,8 +1,8 @@
 \name{cexor}
 \alias{cexor}
 
-\title{ ChIP-exo peak-pair calling}
-\description{ ChIP-exo peak-pair calling. }
+\title{ ChIP-exo peak-pair calling with replicates}
+\description{ ChIP-exo peak-pair calling with replicates. }
 
 \usage{
 cexor(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.01, 
@@ -28,8 +28,8 @@ The internal functions \code{pskellam} and \code{pskellam.sp} from the Jerry W. 
 
 \value{
   A list containing the following elements:
-  \item{bindingEvents}{ A GRanges object with reproducible peak pair locations. The metadata 'value' indicates the Irreproducible discovery rate (IDR) estimated at this region.}
-  \item{bindingCentres}{ A GRanges object with centre position of reproducible peak pair locations. The metadata 'value' indicates the Irreproducible discovery rate (IDR) estimated at this region.}
+  \item{bindingEvents}{ A GRanges object with reproducible peak pair locations. The metadata 'value' indicates the Irreproducible discovery rate (IDR) estimated at this region, while 'repI.neg.log10pvalue' indicates -log10(p-value) for the replicate I. 'Stouffer.pvalue' and 'Fisher.pvalue' report the combined p-value considering they come from from independent significance tests. }
+  \item{bindingCentres}{ A GRanges object with centre position of reproducible peak pair locations. The metadata 'value' indicates the Irreproducible discovery rate (IDR) estimated at this region, while 'repI.neg.log10pvalue' indicates -log10(p-value) for the replicate I. 'Stouffer.pvalue' and 'Fisher.pvalue' report the combined p-value considering they come from from independent significance tests.}
   \item{pairedPeaksRepl}{ A GRangesList object with the location of peak pairs retrieved at each replicate.  The metadata 'score' indicates -log10(p-value).}
   
 }
@@ -39,7 +39,7 @@ Skellam JG (1946) The frequency distribution of the difference between two Poiss
 Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. Ann Appl Stat 5: 1752-1779. \cr 
 Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. Cell 147: 1408-1419. }
 
-\author{ Pedro Madrigal, \email{pm@engineering.com} }
+\author{ Pedro Madrigal, \email{pm12@sanger.ac.uk} }
 
 \seealso{ \code{\link{CexoR-package}} }
 

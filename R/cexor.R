@@ -232,6 +232,8 @@ repl <- list()
 
 for (w in 1:NT){
 
+
+
       repl[[w]] <- GRanges(seqnames=pairedPeaks[[w]]$chr,
                   ranges=IRanges(pairedPeaks[[w]]$start, end=pairedPeaks[[w]]$end),
                   score=pairedPeaks[[w]]$log10.pval.binding.event)
@@ -273,12 +275,60 @@ for (w in 1:NT){
  idr.out <- est.IDR(x=MM, mu, sigma, rho, p, eps=0.00001)
  #idr.out$IDR
 
- #FINAL  sites
- values(finalset) <- idr.out$IDR
+# #FINAL  sites
+# values(finalset) <- idr.out$IDR
  passingIDR <- which(idr.out$IDR<0.01)
 
+################################################################
+# prepare final GRanges
+
+PVALMATRIX=10^-MM
+
+MM2 <- as.data.frame(MM)
+colnames(MM2) <- paste(paste("rep", as.character(1:NT), sep=""), "neg.log10pvalue",sep=".")
+# get p-values
+
+
+
+
+#http://en.wikipedia.org/wiki/Fisher%27s_method
+Stouffer.test <- function(p, w) { # p is a vector of p-values
+  if (missing(w)) {
+    w <- rep(1, length(p))/length(p)
+  } else {
+    if (length(w) != length(p))
+      stop("Length of p and w must equal!")
+  }
+  Zi <- qnorm(1-p) 
+  Z  <- sum(w*Zi)/sqrt(sum(w^2))
+  p.val <- 1-pnorm(Z)
+  return(c(p.value = p.val))
+}
+#http://en.wikipedia.org/wiki/Fisher%27s_method
+Fisher.test <- function(p) {
+  Xsq <- -2*sum(log(p))
+  p.val <- 1-pchisq(Xsq, df = 2*length(p))
+  return(c(p.value = p.val))
+}
+
+Stouffer <-c()
+Fisher <-c()
+for (i in 1:dim(PVALMATRIX)[1]) {
+
+	Stouffer[i] <- Stouffer.test(p=PVALMATRIX[i,])[[1]]
+	Fisher[i] <- Fisher.test(p=PVALMATRIX[i,])[[1]]
+ 
+
+}
+
+# Fisher's
+ mcols(finalset) <- data.frame(IDR=idr.out$IDR, MM2, Stouffer.pvalue=Stouffer, Fisher.pvalue=Fisher)
+ 
+
+###############################################################
  #centres
  finalsetcentres <- finalset
+
  start(finalsetcentres) <- round( (start(finalset) + end(finalset) )/2 )
  end(finalsetcentres)  <-  round( (start(finalset) + end(finalset) )/2 ) + 1
 

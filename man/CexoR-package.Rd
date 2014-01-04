@@ -9,8 +9,8 @@
 \tabular{ll}{
 Package: \tab CexoR\cr
 Type: \tab Package\cr
-Version: \tab 0.99.5\cr
-Date: \tab 2013-09-09\cr
+Version: \tab 1.1.2\cr
+Date: \tab 2014-01-01\cr
 License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
 LazyLoad: \tab yes\cr
 }
@@ -19,7 +19,7 @@ LazyLoad: \tab yes\cr
 \author{
 Pedro Madrigal,
 
-Maintainer: Pedro Madrigal \email{pm@engineering.com}
+Maintainer: Pedro Madrigal \email{pm12@sanger.ac.uk}
 
 }
 \references{ Madrigal P, et al. (in preparation).\cr 
