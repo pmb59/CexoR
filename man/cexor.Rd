@@ -34,7 +34,7 @@ The internal functions \code{pskellam} and \code{pskellam.sp} from the Jerry W. 
   
 }
 
-\references{ Madrigal P, et al. (in preparation).\cr 
+\references{ Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.\cr 
 Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. J R Stat Soc Ser A 109: 296. \cr 
 Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. Ann Appl Stat 5: 1752-1779. \cr 
 Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. Cell 147: 1408-1419. }

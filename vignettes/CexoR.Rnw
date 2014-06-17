@@ -90,7 +90,7 @@ setwd(owd)
 \item Bailey TL, et al. (2013). Practical Guidelines for the Comprehensive Analysis of ChIP-seq Data. \textbf{PLoS Comput Biol} 9: e1003326.
 \item Landt SG, et al. (2012). ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. \textbf{Genome Res} 22: 1813-1831.  
 \item Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. \textbf{J R Stat Soc Ser A} 109: 296.
-\item Madrigal P, et al. (in preparation).
+\item Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.
 \item Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. \textbf{Ann Appl Stat} 5: 1752-1779. 
 \item Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. \textbf{Cell} 147: 1408-1419.
 \end{itemize}

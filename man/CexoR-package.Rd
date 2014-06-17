@@ -9,7 +9,7 @@
 \tabular{ll}{
 Package: \tab CexoR\cr
 Type: \tab Package\cr
-Version: \tab 1.1.2\cr
+Version: \tab 1.3.2\cr
 Date: \tab 2014-01-01\cr
 License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
 LazyLoad: \tab yes\cr
@@ -22,7 +22,7 @@ Pedro Madrigal,
 Maintainer: Pedro Madrigal \email{pm12@sanger.ac.uk}
 
 }
-\references{ Madrigal P, et al. (in preparation).\cr 
+\references{ Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.\cr 
 Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. J R Stat Soc Ser A 109: 296. \cr 
 Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. Ann Appl Stat 5: 1752-1779. \cr 
 Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. Cell 147: 1408-1419. }
