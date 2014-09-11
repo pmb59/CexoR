@@ -1,8 +1,8 @@
 
 exportPattern("^[^\\.]")
 
-importFrom(S4Vectors,Rle)
-importFrom(IRanges,IRanges,DataFrame,RangedData,RangesList,SimpleList,colnames,"colnames<-",coverage,mean)
+import(S4Vectors)
+importFrom(IRanges,IRanges,RangedData,RangesList,colnames,"colnames<-",coverage,mean)
 importFrom(GenomeInfoDb,seqlengths,"seqlengths<-")
 importFrom(GenomicRanges,GRanges,coverage,intersect,subsetByOverlaps,values,"values<-",as.data.frame)
 importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList)
