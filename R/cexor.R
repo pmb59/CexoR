@@ -1,5 +1,5 @@
 
-cexor <- function(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.01, N=5e6, bedfile=TRUE)
+cexor <- function(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.01, N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
 {
 
   options(digits=10)
@@ -264,20 +264,20 @@ for (w in 1:NT){
 
 
 #send matrix MM to IDR analysis
-  mu <- 2.6
-  sigma <- 1.3
-  rho <- 0.8
-  p <- 0.7
+#  mu <- 2.6
+#  sigma <- 1.3
+#  rho <- 0.8
+#  p <- 0.7
 
  #library(idr)
  #x = a m by n numeric matrix, where m= num of replicates, n=num of observations. Numerical values representing the significance
  #of the observations, where signals are expected to have large values, for example, -log(p-value).
- idr.out <- est.IDR(x=MM, mu, sigma, rho, p, eps=0.00001)
+ idr.out <- est.IDR(x=MM, mu, sigma, rho, prop, eps=0.00001)
  #idr.out$IDR
 
 # #FINAL  sites
 # values(finalset) <- idr.out$IDR
- passingIDR <- which(idr.out$IDR<0.01)
+ passingIDR <- which(idr.out$IDR< idr)
 
 ################################################################
 # prepare final GRanges

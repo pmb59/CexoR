@@ -40,7 +40,7 @@ options(prompt="R> ")
 
 
 \section{Introduction}
-For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein- DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
+For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein-DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
 the identification of protein-DNA binding sites. The midpoint between the strand-specific paired peaks formed at its forward and reverse strands is delimited by the exonuclease stop sites, within the protein binding event is located (Rhee and Pugh, 2011).
 
 \section{Methodology}
@@ -81,9 +81,13 @@ setwd(owd)
 13 reproducible peak-pair events are reported for the established thresholds ($p$-value $\leq 1e-12$, IDR $\leq 0.01$).\\
 
 
-\textbf{Important note}: For the correct estimation of the IDR (Li et al., 2011) peak-pair calling should be relaxed (e.g., $p$-value=1e-3, or smaller depending on the sequencing depth), enabling the noise component be present in the data and therefore allowing the peak-pairs to be separated into a reproducible and an irreproducible groups. In the example shown above, as the dataset is very small and peaks are highly reproducible, IDR in the overlapped peak-pairs across the 3 replicates is zero. For more information about using IDR in high-throughput sequencing datasets see Land et al. (2012) and Bailey et al. (2013), or the mathematical description in Li et al. (2011).
+\textbf{Important notes}: 
+\begin{itemize}
+\item For the correct estimation of the IDR (Li et al., 2011) peak-pair calling should be relaxed (e.g., $p$-value=1e-3, or smaller depending on the sequencing depth), enabling the noise component be present in the data and therefore allowing the peak-pairs to be separated into a reproducible and an irreproducible groups. In the example shown above, as the dataset is very small and peaks are highly reproducible, IDR in the overlapped peak-pairs across the 3 replicates is zero. 
+\item IDR calculation could produce varying results depending on the choice of initial estimates for four parameters needed by the algorithm (mu, sigma, rho, prop). Li et al. (2011) recommend trying several choices, so that the parameter estimation does not get trapped in a local maximum.
+\item For more information about using IDR in high-throughput sequencing datasets see Land et al. (2012) and Bailey et al. (2013), or the mathematical description in Li et al. (2011).
 
-
+\end{itemize}
 
 \section{References}
 \begin{itemize}

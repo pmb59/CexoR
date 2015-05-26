@@ -6,7 +6,7 @@
 
 \usage{
 cexor(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.01, 
-N=5e6, bedfile=TRUE)
+N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
 }
 
 \arguments{
@@ -19,6 +19,10 @@ N=5e6, bedfile=TRUE)
   \item{idr}{ Irreproducible discovery rate cutoff [0-1]. }
   \item{N}{ Genome is divided in blocks of N bp. for processing. N must be not higher than the size of the smallest chromosome. }
   \item{bedfile}{ Generate BED files of ChIP-exo reproducible peak pairs.}
+  \item{mu}{ A starting value for the mean of the reproducible component (see 'idr' package).}
+  \item{sigma}{ A starting value for the standard deviation of the reproducible component (see 'idr' package).}
+  \item{rho}{ A starting value for the correlation coefficient of the reproducible component (see 'idr' package).}
+  \item{prop}{ A starting value for the proportion of reproducible component (see 'idr' package).}
 
   
 }

@@ -6,5 +6,4 @@
 \alias{pskellam.sp}
 
 
-
 \keyword{internal}
