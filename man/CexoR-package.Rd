@@ -4,13 +4,13 @@
 \docType{package}
 
 \title{ An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates }
-\description{ Strand specific peak-pair calling in ChIP-exo replicates. The cumulative Skellam distribution function (package 'skellam') is used to detect significant normalized count differences of opposed sign at each DNA strand (peak-pairs). Irreproducible discovery rate for overlapping peak-pairs across biological replicates is estimated using the package 'idr'.}
+\description{ Strand specific peak-pair calling in ChIP-exo replicates. The cumulative Skellam distribution function (package 'skellam') is used to detect significant normalised count differences of opposed sign at each DNA strand (peak-pairs). Irreproducible discovery rate for overlapping peak-pairs across biological replicates is estimated using the package 'idr'.}
 \details{
 \tabular{ll}{
 Package: \tab CexoR\cr
 Type: \tab Package\cr
-Version: \tab 1.7.1\cr
-Date: \tab 2015-05-26\cr
+Version: \tab 1.7.2\cr
+Date: \tab 2015-06-09\cr
 License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
 LazyLoad: \tab yes\cr
 }
@@ -40,7 +40,9 @@ r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
 r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
 r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
 
-cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+chipexo <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+
+plotcexor(bam=c(r1,r2,r3), peaks=chipexo, EXT=500)
 
 setwd(owd)
 }

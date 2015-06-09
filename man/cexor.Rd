@@ -14,7 +14,7 @@ N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
   \item{chrN}{ Vector of chromosome names. }
   \item{chrL}{ Vector of chromosome sizes (bp). }
   \item{p}{ P-value cutoff (should be relaxed to allow the correct estimation of the irreproducible discovery rate (idr). See the vignette for more information.) }
-  \item{dpeaks}{ Main. and max. allowed distance between peak pairs located at opposed strands in a replicate (bp). }
+  \item{dpeaks}{ Min. and max. allowed distance between peak pairs located at opposed strands in a replicate (bp). }
   \item{dpairs}{ Max. allowable distance between peak-pair centres across replicates (bp). }
   \item{idr}{ Irreproducible discovery rate cutoff [0-1]. }
   \item{N}{ Genome is divided in blocks of N bp. for processing. N must be not higher than the size of the smallest chromosome. }
@@ -60,7 +60,9 @@ r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
 r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
 r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
 
-cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+chipexo <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+
+plotcexor(bam=c(r1,r2,r3), peaks=chipexo, EXT=500)
 
 setwd(owd)
 

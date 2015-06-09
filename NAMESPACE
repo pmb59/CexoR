@@ -5,10 +5,11 @@ import(S4Vectors)
 importFrom(IRanges,IRanges,RangedData,RangesList,colnames,"colnames<-",coverage,mean)
 importFrom(GenomeInfoDb,seqlengths,"seqlengths<-")
 importFrom(GenomicRanges,GRanges,coverage,intersect,subsetByOverlaps,values,"values<-",as.data.frame)
-importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList)
+importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList,scanBamFlag)
 importFrom(rtracklayer,export.bedGraph)
 importFrom(idr,est.IDR)
-
+importFrom(RColorBrewer,brewer.pal)
+importFrom(genomation,ScoreMatrixBin)
 
 export(cexor)
-
+export(plotcexor)

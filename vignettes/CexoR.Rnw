@@ -15,7 +15,7 @@ BiocStyle::latex()
 \begin{document}
 
 \title{\Biocpkg{ CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
-\date{Modified: July, 2013. Compiled: \today}
+\date{Last Modified: June, 2015. Compiled: \today}
 %\author{Pedro Madrigal\footnote{pm12@sanger.ac.uk}}
 \author{Pedro Madrigal}
 
@@ -78,7 +78,14 @@ setwd(owd)
 @ 
 \end{small}
 
-13 reproducible peak-pair events are reported for the established thresholds ($p$-value $\leq 1e-12$, IDR $\leq 0.01$).\\
+13 reproducible peak-pair events are reported for the established thresholds ($p$-value $\leq 1e-12$, IDR $\leq 0.01$). We can now plot the mean profile of lambda exonuclease stop sites and reads, 500 bp around the central position of reproducible peak-pair locations, by running the function "plotcexor": \\
+
+\begin{small}
+<<Visualisation of ChIP-exo replicates, fig.width=4.5, fig.height=9>>=
+options(width=60)
+plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
+@
+\end{small}
 
 
 \textbf{Important notes}: 
@@ -91,10 +98,10 @@ setwd(owd)
 
 \section{References}
 \begin{itemize}
+\item Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.
 \item Bailey TL, et al. (2013). Practical Guidelines for the Comprehensive Analysis of ChIP-seq Data. \textbf{PLoS Comput Biol} 9: e1003326.
 \item Landt SG, et al. (2012). ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. \textbf{Genome Res} 22: 1813-1831.  
 \item Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. \textbf{J R Stat Soc Ser A} 109: 296.
-\item Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.
 \item Li Q, Brown J, Huang H, Bickel P (2011) Measuring reproducibility of high-throughput experiments. \textbf{Ann Appl Stat} 5: 1752-1779. 
 \item Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. \textbf{Cell} 147: 1408-1419.
 \end{itemize}
