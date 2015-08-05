@@ -37,7 +37,8 @@ options(prompt="R> ")
 @
 
  
-
+\section{Citation}
+\fbox{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. \href{http://dx.doi.org/10.14806/ej.21.0.837}{http://dx.doi.org/10.14806/ej.21.0.837} }
 
 \section{Introduction}
 For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein-DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
@@ -45,7 +46,9 @@ the identification of protein-DNA binding sites. The midpoint between the strand
 
 \section{Methodology}
 Lambda exonuclease stop site
-(\Robject{5}' end of the reads) counts are calculated separately for both DNA strands from the alignment files in BAM format using the Bioconductor \Biocpkg{Rsamtools}. Counts are then normalized using linear scaling to the same sample depth of the smaller dataset. Using the Skellam distribution (Skellam, 1946), \Biocpkg{CexoR} models at each nucleotide position the discrete signed difference of two Poisson counts at forward and reverse strands, respectively. Then, detecting nearby located significant count differences of opposed sign (peak-pairs) at both strands allows \Biocpkg{CexoR} to delimit the flanks of the protein binding event location at base pair resolution. A one-sided $p$-value is obtained for each peak using the complementary cumulative Skellam distribution function, and a final $p$-value for the peak-pair (default cut-off $1e-12$) is reported as the sum of the two $p$-values. To account for the reproducibility of replicated peak-pairs, which central point must be located at a user-defined maximum distance, $p$-values are submitted for irreproducible discovery rate estimation (Li et al., 2011). Stouffer's and Fisher's combined p-values are given for the final peak-pair calls. Finally, BED files containing reproducible binding event locations formed within peak-pairs are reported, as well as their midpoints.
+(\Robject{5}' end of the reads) counts are calculated separately for both DNA strands from the alignment files in BAM format using the Bioconductor \Biocpkg{Rsamtools}. Counts are then normalized using linear scaling to the same sample depth of the smaller dataset. Using the Skellam distribution (Skellam, 1946), \Biocpkg{CexoR} models at each nucleotide position the discrete signed difference of two Poisson counts at forward and reverse strands, respectively. Then, detecting nearby located significant count differences of opposed sign (peak-pairs) at both strands allows \Biocpkg{CexoR} to delimit the flanks of the protein binding event location at base pair resolution. A one-sided $p$-value is obtained for each peak using the complementary cumulative Skellam distribution function, and a final $p$-value for the peak-pair (default cut-off $1e-12$) is reported as the sum of the two $p$-values. To account for the reproducibility of replicated peak-pairs, which central point must be located at a user-defined maximum distance, $p$-values are submitted for irreproducible discovery rate estimation (Li et al., 2011). Stouffer's and Fisher's combined p-values are given for the final peak-pair calls. Finally, BED files containing reproducible binding event locations formed within peak-pairs are reported, as well as their midpoints. 
+
+More information can be found in Madrigal (2015).
 
 
 \section{Example}
@@ -96,9 +99,10 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 
 \end{itemize}
 
+
 \section{References}
 \begin{itemize}
-\item Madrigal P (in preparation) CexoR: An R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.
+\item Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21: e837.
 \item Bailey TL, et al. (2013). Practical Guidelines for the Comprehensive Analysis of ChIP-seq Data. \textbf{PLoS Comput Biol} 9: e1003326.
 \item Landt SG, et al. (2012). ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. \textbf{Genome Res} 22: 1813-1831.  
 \item Skellam JG (1946) The frequency distribution of the difference between two Poisson variates belonging to different populations. \textbf{J R Stat Soc Ser A} 109: 296.
