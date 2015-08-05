@@ -1,0 +1,12 @@
+citEntry(entry="article",
+         title = "CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates",
+         author = personList(as.person("Pedro Madrigal")),
+         year = 2015,
+         journal = "EMBnet.journal",
+         doi = "10.14806/ej.21.0.837",
+         url = "http://journal.embnet.org/index.php/embnetjournal/article/view/837",
+         volume = 21,
+         issue = 1,
+         pages = e837,
+         textVersion = 
+         paste("Pedro Madrigal (2015):", "CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.", "EMBnet.journal" ) )
