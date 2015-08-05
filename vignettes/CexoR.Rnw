@@ -38,7 +38,7 @@ options(prompt="R> ")
 
  
 \section{Citation}
-\fbox{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. \href{http://dx.doi.org/10.14806/ej.21.0.837}{http://dx.doi.org/10.14806/ej.21.0.837} }
+Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. http://dx.doi.org/10.14806/ej.21.0.837
 
 \section{Introduction}
 For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein-DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
