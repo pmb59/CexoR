@@ -9,7 +9,7 @@
 \tabular{ll}{
 Package: \tab CexoR\cr
 Type: \tab Package\cr
-Version: \tab 1.7.3\cr
+Version: \tab 1.7.4\cr
 Date: \tab 2015-07-09\cr
 License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
 LazyLoad: \tab yes\cr
