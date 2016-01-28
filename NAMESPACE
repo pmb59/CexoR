@@ -2,9 +2,9 @@
 exportPattern("^[^\\.]")
 
 import(S4Vectors)
+import(GenomicRanges)
 importFrom(IRanges,IRanges,RangedData,RangesList,colnames,"colnames<-",coverage,mean)
 importFrom(GenomeInfoDb,seqlengths,"seqlengths<-")
-importFrom(GenomicRanges,GRanges,coverage,intersect,subsetByOverlaps,values,"values<-",as.data.frame)
 importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList,scanBamFlag)
 importFrom(rtracklayer,export.bedGraph)
 importFrom(idr,est.IDR)
