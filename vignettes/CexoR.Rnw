@@ -110,6 +110,10 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 \item Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detected at single-nucleotide resolution. \textbf{Cell} 147: 1408-1419.
 \end{itemize}
 
+\section{References}
+The author wishes to acknowledge Christoph Sebastian Borlin, Md. Abul Hassan Samee, Vivek Rexwal and Sudhir Jadhao for helpful comments.
+
+
 \section{Details}
 
 This document was written using:
