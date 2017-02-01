@@ -119,102 +119,114 @@ cexor <- function(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.0
 
 
   for (w in 1:NT){
-      chrLwithPeaksCount <- 0        
-      filteredScoreFinalChr  <- data.frame()
+      	chrLwithPeaksCount <- 0        
+      	filteredScoreFinalChr  <- data.frame()
 
-  for (i in 1:LL){  
-      filteredScoreFinal     <- data.frame() 
-      listLen <-  listLen + 1
-      mL <- max(length(SampleCovPlus[[listLen]]), length(SampleCovMinus[[listLen]]))
-      frames <- floor(mL / N) +1 
-      for (m in 1:frames){
+  		for (i in 1:LL){  
+      		filteredScoreFinal     <- data.frame() 
+      		listLen <-  listLen + 1
+      		mL <- max(length(SampleCovPlus[[listLen]]), length(SampleCovMinus[[listLen]]))
+      		#print(LL)
+      		#print(mL)
+      		#frames <- floor(mL / N) +1 
+      		frames <- floor(mL / N) #+1 ###NEW
+      		#print(frames)
+      		for (m in 1:frames){
 
-         if (m != frames){
-            lFrame <-  (((m-1)*N)+1):(m*N)
-         }
-         if (m == frames){
-            lFrame<- (((m-1)*N)+1):mL   
-         }
-            sample_forward <- as.integer(SampleCovPlus[[listLen]] [  lFrame ])
-            sample_reverse <- as.integer(SampleCovMinus[[listLen]][  lFrame ])
+         		if (m != frames){
+            		lFrame <-  (((m-1)*N)+1):(m*N)
+         		}
+         		if (m == frames){
+            		lFrame<- (((m-1)*N)+1):mL   
+         		}
+         	#print(m)
+         	#print(lFrame)	
+            	sample_forward <- as.integer(SampleCovPlus[[listLen]] [  lFrame ])
+            	sample_reverse <- as.integer(SampleCovMinus[[listLen]][  lFrame ])
 
-         #Difference of exonuclease start sites at each strand
-         k <- as.integer(sample_forward - sample_reverse)
+         		#Difference of exonuclease start sites at each strand
+         		k <- as.integer(sample_forward - sample_reverse)
 
-         rm(sample_forward,sample_reverse)
+         		rm(sample_forward,sample_reverse)
 
-         # Skellam cumulative distribution function
-         #Calculate p-value (two-sided test)
-         score <- c()
-         iPlus  <- which(k>=0)   # '='can be at both
-         iMinus <- which(k<0)
-         score[iPlus]  <- pskellam(q=k[iPlus],    lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = FALSE, log.p = FALSE)
-         score[iMinus] <- pskellam(q=k[iMinus]-1, lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = TRUE, log.p = FALSE)
+         		# Skellam cumulative distribution function
+         		#Calculate p-value (two-sided test)
+         		score <- c()
+         		iPlus  <- which(k>=0)   # '='can be at both
+         		iMinus <- which(k<0)
+         		score[iPlus]  <- pskellam(q=k[iPlus],    lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = FALSE, log.p = FALSE)
+         		score[iMinus] <- pskellam(q=k[iMinus]-1, lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = TRUE, log.p = FALSE)
 
-         #P-VALUE threshold
-         positions  <- which(score <= p)   #score has peak p-values, F(x)
+         		#P-VALUE threshold
+         		positions  <- which(score <= p)   #score has peak p-values, F(x)
 
-         #Which ones are close to each other
-         maxD = dpeaks[2]  #150 #30
-         minD = dpeaks[1]  #0   #8
+         		#Which ones are close to each other
+         		maxD = dpeaks[2]  #150 #30
+         		minD = dpeaks[1]  #0   #8
 
-         filteredScore <- data.frame()
-         idx=0
+         		filteredScore <- data.frame()
+         		idx=0
 
-         if (length(positions)>1){
-              #Keep just Max and Min in a region of length dpeaks[2]+1
-              W = dpeaks[2]+1   #151
-              new_positions <- c()
-              for (ww in 1:length(positions)){
-                   if ( positions[ww]-W < ceiling( W)  ){  vectorAux <- k[1:(positions[ww]+W) ]  }
-                   if ( positions[ww]-W >= ceiling( W)  &  positions[ww]+W <= N-floor(W)  ){  vectorAux <- k[(positions[ww]-W):(positions[ww]+W) ]  }
-                   if ( positions[ww]+W > N-floor(W)  ){  vectorAux <- k[(positions[ww]-W):N ]  }
-                   maximo <- max(vectorAux)
-                   minimo <- min(vectorAux)
-                   if( k[positions[ww]]==maximo && maximo >0 ){ new_positions <- c( new_positions,positions[ww]) }
-                   if( k[positions[ww]]==minimo && minimo <0 ){ new_positions <- c( new_positions,positions[ww]) }
-              }
-              positions <- new_positions
-              rm(new_positions)
+         		if (length(positions)>1){
+              		#Keep just Max and Min in a region of length dpeaks[2]+1
+              		W = dpeaks[2]+1   #151
+              		new_positions <- c()
+              		for (ww in 1:length(positions)){
+                		if ( positions[ww]-W < ceiling( W)  ){  vectorAux <- k[1:(positions[ww]+W) ]  }
+                   		if ( positions[ww]-W >= ceiling( W)  &  positions[ww]+W <= N-floor(W)  ){  vectorAux <- k[(positions[ww]-W):(positions[ww]+W) ]  }
+                   		if ( positions[ww]+W > N-floor(W)  ){  vectorAux <- k[(positions[ww]-W):N ]  }
+                   		maximo <- max(vectorAux)
+                   		minimo <- min(vectorAux)
+ #                  		print(ww)
+  #                 		print(maximo)
+  #                 		print(minimo)
+                   		if( k[positions[ww]]==maximo && maximo >0 ){ new_positions <- c( new_positions,positions[ww]) }
+                   		if( k[positions[ww]]==minimo && minimo <0 ){ new_positions <- c( new_positions,positions[ww]) }
+              	}
+        		positions <- new_positions
+        		rm(new_positions)
+   				if (length(positions) >= 2){ #######################NEW
+        			for (j in 2:length(positions)){
+                		A <- positions[j-1]
+	                	B <- positions[j]
+	                	C <- sign(k[positions[j-1]])
+	                	D <- sign(k[positions[j]])
+	                	# region for max and min
+                		if (C != 0  && D != 0 ){
+	             			if (B< A+maxD && B> A+minD  && (C == 1  && D== -1 || C== -1  && D == 1)  ){
+		            			idx=idx+1
+		                   		filteredScore[idx,1] <- chrN[i]
+		                   		filteredScore[idx,2] <- round((lFrame[positions[j-1]] + lFrame[positions[j]])/2) -dpairs
+		                   		filteredScore[idx,3] <- round((lFrame[positions[j-1]] + lFrame[positions[j]])/2) +dpairs
+		                   		filteredScore[idx,4] <- lFrame[positions[j]]-lFrame[positions[j-1]]
+		                   		filteredScore[idx,5] <- signif(score[positions[j-1]], digits=30)
+		                   		filteredScore[idx,6] <- signif(score[positions[j]] , digits=30)
+				           		pvalVector <- c(score[positions[j-1]] , score[positions[j]])
+				   		   		filteredScore[idx,7] <- sum(pvalVector)  #pchisq(-2*sum(log(pvalVector)), df=2*length(pvalVector), lower=FALSE )
+			           	   		filteredScore[idx,8] <- -1*log10(filteredScore[idx,7])
+			        		}
+		        	 	}
+        	 		}
+ 				}########################NEW             
+ 		}
 
-              for (j in 2:length(positions)){
-                    A <- positions[j-1]
-	                  B <- positions[j]
-	                  C <- sign(k[positions[j-1]])
-	                  D <- sign(k[positions[j]])
-	                  # region for max and min
-                    if (C != 0  && D != 0 ){
-	                     if (B< A+maxD && B> A+minD  && (C == 1  && D== -1 || C== -1  && D == 1)  ){
-		                   idx=idx+1
-		                   filteredScore[idx,1] <- chrN[i]
-		                   filteredScore[idx,2] <- round((lFrame[positions[j-1]] + lFrame[positions[j]])/2) -dpairs
-		                   filteredScore[idx,3] <- round((lFrame[positions[j-1]] + lFrame[positions[j]])/2) +dpairs
-		                   filteredScore[idx,4] <- lFrame[positions[j]]-lFrame[positions[j-1]]
-		                   filteredScore[idx,5] <- signif(score[positions[j-1]], digits=30)
-		                   filteredScore[idx,6] <- signif(score[positions[j]] , digits=30)
-				          pvalVector <- c(score[positions[j-1]] , score[positions[j]])
-				   filteredScore[idx,7] <- sum(pvalVector)  #pchisq(-2*sum(log(pvalVector)), df=2*length(pvalVector), lower=FALSE )
-			           filteredScore[idx,8] <- -1*log10(filteredScore[idx,7])
-			                 }
-		                }
-              }
-          }
-
-          if ( length(filteredScoreFinal) ==0  &&  length(filteredScore) > 0) { filteredScoreFinal <- filteredScore  }
+		if ( length(filteredScoreFinal) ==0  &&  length(filteredScore) > 0) { filteredScoreFinal <- filteredScore  }
                    
-              if ( length(filteredScoreFinal) > 0 &&  length(filteredScore) > 0) { filteredScoreFinal <- rbind(filteredScoreFinal,filteredScore)}
+			if ( length(filteredScoreFinal) > 0 &&  length(filteredScore) > 0) { filteredScoreFinal <- rbind(filteredScoreFinal,filteredScore)}
 
-          }     #end frame
+    }     #end frame
+    
+    
 
-          if ( length(filteredScoreFinal) > 0  ){                                                
-             if (length(filteredScoreFinalChr) ==0 ) {  filteredScoreFinalChr <- filteredScoreFinal   }
-             if (length(filteredScoreFinalChr) > 0 ) {  filteredScoreFinalChr <- rbind(filteredScoreFinalChr, filteredScoreFinal )  }
-             #save the chromosome
-             chrLwithPeaksCount <- chrLwithPeaksCount + 1                                        
-             if(chrLwithPeaksCount == 1) { chrLwithPeaks[[w]] <- chrL[i]  }                      
-             if(chrLwithPeaksCount > 1)  { chrLwithPeaks[[w]][chrLwithPeaksCount] <- chrL[i]  }  
-          }                                                                                      
-  }         #end chromosome
+   if ( length(filteredScoreFinal) > 0  ){                                                
+        if (length(filteredScoreFinalChr) ==0 ) {  filteredScoreFinalChr <- filteredScoreFinal   }
+    	if (length(filteredScoreFinalChr) > 0 ) {  filteredScoreFinalChr <- rbind(filteredScoreFinalChr, filteredScoreFinal )  }
+        #save the chromosome
+        chrLwithPeaksCount <- chrLwithPeaksCount + 1                                        
+        if(chrLwithPeaksCount == 1) { chrLwithPeaks[[w]] <- chrL[i]  }                      
+        if(chrLwithPeaksCount > 1)  { chrLwithPeaks[[w]][chrLwithPeaksCount] <- chrL[i]  }  
+	}                                                                                      
+}         #end chromosome
                                      
 
  colnames(filteredScoreFinalChr) <- c("chr","start","end","length","pval.peak.forward","pval.peak.reverse", "pval.binding.event","log10.pval.binding.event")
@@ -222,6 +234,8 @@ cexor <- function(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.0
 
  rm(filteredScoreFinalChr)
 }
+
+#print(head(filteredScoreFinalChr))
 
 
 
@@ -239,8 +253,14 @@ for (w in 1:NT){
                   score=pairedPeaks[[w]]$log10.pval.binding.event)
 
        seqlengths(repl[[w]])   <- chrLwithPeaks[[w]]    ##chrL
+       
+       repl[[w]] <- trim(repl[[w]], use.names=TRUE)
 }
 
+
+
+
+#print(repl[[1]])
 
 #(intersect) final list of chip-exo peaks
 finalset  <- repl[[1]]
@@ -251,17 +271,19 @@ for (w in 2:NT){
 
 }
 
+       finalset <- trim(finalset, use.names=TRUE)
+       
+#print(finalset)
 
 #prepare matrix MM for IDR assessment
 MM <- matrix(data = NA, nrow = length(finalset), ncol = NT)
+
 
 for (w in 1:NT){
     for (i in 1: length(finalset) ){
       MM[i,w] <-   max(score( subsetByOverlaps(repl[[w]],finalset[i]) ))   #MIN is very conservative
     }
 }
-
-
 
 #send matrix MM to IDR analysis
 #  mu <- 2.6
@@ -278,6 +300,8 @@ for (w in 1:NT){
 # #FINAL  sites
 # values(finalset) <- idr.out$IDR
  passingIDR <- which(idr.out$IDR< idr)
+
+
 
 ################################################################
 # prepare final GRanges
