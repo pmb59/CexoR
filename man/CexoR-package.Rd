@@ -19,7 +19,7 @@ LazyLoad: \tab yes\cr
 \author{
 Pedro Madrigal,
 
-Maintainer: Pedro Madrigal \email{pm12@sanger.ac.uk}
+Maintainer: Pedro Madrigal \email{dnaseiseq@gmail.com}
 
 }
 \references{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. EMBnet.journal  21: e837. \cr 

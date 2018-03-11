@@ -16,7 +16,7 @@ BiocStyle::latex()
 
 \title{\Biocpkg{ CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
 \date{Last Modified: June, 2015. Compiled: \today}
-%\author{Pedro Madrigal\footnote{pm12@sanger.ac.uk}}
+%\author{Pedro Madrigal\footnote{dnaseiseq@gmail.com}}
 \author{Pedro Madrigal}
 
 
