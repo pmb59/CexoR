@@ -4,7 +4,7 @@ Date: 2015-07-09
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
         in ChIP-exo replicates
-Author: Pedro Madrigal <dnaseiseq@gmail.com>
+Author: Pedro Madrigal <bioinformatics.engineer@gmail.com>
 Description: Strand specific peak-pair calling in ChIP-exo replicates.
         The cumulative Skellam distribution function (package
         'skellam') is used to detect significant normalised count
@@ -12,7 +12,7 @@ Description: Strand specific peak-pair calling in ChIP-exo replicates.
         Irreproducible discovery rate for overlapping peak-pairs across
         biological replicates is estimated using the package 'idr'.
 Depends: R (>= 2.10.0), S4Vectors, IRanges
-Maintainer: Pedro Madrigal <pm12@sanger.ac.uk>
+Maintainer: Pedro Madrigal <bioinformatics.engineer@gmail.com>
 Imports: Rsamtools, GenomeInfoDb, GenomicRanges, rtracklayer, idr, RColorBrewer, genomation
 Suggests: RUnit, BiocGenerics, BiocStyle
 License: Artistic-2.0 | GPL-2 + file LICENSE
