@@ -26,7 +26,7 @@ plotcexor(bam, peaks, EXT=500)
 
 \references{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. EMBnet.journal  21: e837.  }
 
-\author{ Pedro Madrigal, \email{dnaseiseq@gmail.com} }
+\author{ Pedro Madrigal, \email{bioinformatics.engineer@gmail.com} }
 
 \seealso{ \code{\link{CexoR-package}} }
 

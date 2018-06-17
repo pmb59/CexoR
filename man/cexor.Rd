@@ -5,7 +5,7 @@
 \description{ ChIP-exo peak-pair calling with replicates. }
 
 \usage{
-cexor(bam, chrN, chrL, p=1e-12, dpeaks=c(0,150), dpairs=100, idr=0.01, 
+cexor(bam, chrN, chrL, p=1e-6, dpeaks=c(0,150), dpairs=100, idr=0.01, 
 N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
 }
 
@@ -13,7 +13,7 @@ N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
   \item{bam}{ BAM alignment files of biological replicates. }
   \item{chrN}{ Vector of chromosome names. }
   \item{chrL}{ Vector of chromosome sizes (bp). }
-  \item{p}{ P-value cutoff (should be relaxed to allow the correct estimation of the irreproducible discovery rate (idr). See the vignette for more information.) }
+  \item{p}{ P-value cutoff (should be relaxed, e.g. 1e-3, to allow the correct estimation of the irreproducible discovery rate (idr). However, this depends on the sequencing depth. For datasets with high number of tag counts, 1e-9 can be appropriate. See the vignette for more information.) }
   \item{dpeaks}{ Min. and max. allowed distance between peak pairs located at opposed strands in a replicate (bp). }
   \item{dpairs}{ Max. allowable distance between peak-pair centres across replicates (bp). }
   \item{idr}{ Irreproducible discovery rate cutoff [0-1]. }
@@ -40,7 +40,7 @@ The internal functions \code{pskellam} and \code{pskellam.sp} from the Jerry W. 
 
 \references{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. EMBnet.journal  21: e837.  }
 
-\author{ Pedro Madrigal, \email{dnaseiseq@gmail.com} }
+\author{ Pedro Madrigal, \email{bioinformatics.engineer@gmail.com} }
 
 \seealso{ \code{\link{CexoR-package}} }
 
