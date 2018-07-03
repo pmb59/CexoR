@@ -5,7 +5,7 @@
 \description{ ChIP-exo peak-pair calling with replicates. }
 
 \usage{
-cexor(bam, chrN, chrL, p=1e-6, dpeaks=c(0,150), dpairs=100, idr=0.01, 
+cexor(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01, 
 N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
 }
 

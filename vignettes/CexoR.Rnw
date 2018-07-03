@@ -15,7 +15,7 @@ BiocStyle::latex()
 \begin{document}
 
 \title{\Biocpkg{ CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
-\date{Last Modified: June, 2015. Compiled: \today}
+\date{Last Modified: July, 2018. Compiled: \today}
 %\author{Pedro Madrigal\footnote{dnaseiseq@gmail.com}}
 \author{Pedro Madrigal}
 
@@ -23,7 +23,7 @@ BiocStyle::latex()
 \maketitle
 
 \begin{center}
-Wellcome Trust Sanger Institute\\Hinxton, Cambridge, UK\\
+University of Cambridge, UK\\
 \end{center}
 
 
@@ -70,7 +70,7 @@ r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
 r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
 r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
 
-peak_pairs <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, N=3e4)
+peak_pairs <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, N=3e4, p=1e-12)
 
 peak_pairs$bindingEvents
 

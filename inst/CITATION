@@ -10,3 +10,15 @@ citEntry(entry="article",
          pages = "e837",
          textVersion = 
          paste("Pedro Madrigal (2015):", "CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates.", "EMBnet.journal" ) )
+
+
+citEntry(entry="article",
+         title = "Identification of Transcription Factor Binding Sites in ChIP-exo using R/Bioconductor",
+         author = personList(as.person("Pedro Madrigal")),
+         year = "2015",
+         journal = "Epigenesys - Bioinformatics Protocol",
+         url = "https://www.epigenesys.eu/en/resources/protocols/bio-informatics/1325-identification-of-transcription-factor-binding-sites-in-chip-exo-using-r-bioconductor-prot-68",
+         volume = "68",
+         textVersion = 
+         paste("Pedro Madrigal (2015):", "Identification of Transcription Factor Binding Sites in ChIP-exo using R/Bioconductor.", "Epigenesys - Bioinformatics Protocol 68" ) )
+

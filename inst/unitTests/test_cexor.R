@@ -10,10 +10,10 @@ test_cexor <- function() {
 	r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
 	r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
 	
-	out <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, N=3e4)
+	out <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, N=3e4, p=1e-12)
 
 	#check that the example data outputs a GRanges with 13 ranges 
-	checkEquals(length(out$bindingEvents), 13)
+    checkEquals(length(out$bindingEvents), 13)
 
         #check that if minimal input is not introduced the package recognizes an error situation
 	#bam
