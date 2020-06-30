@@ -1,6 +1,6 @@
 Package: CexoR
-Version: 1.27.0
-Date: 2018-07-03
+Version: 1.27.1
+Date: 2020-06-29
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
         in ChIP-exo replicates
@@ -9,7 +9,7 @@ Description: Strand specific peak-pair calling in ChIP-exo replicates.
         The cumulative Skellam distribution function (package
         'skellam') is used to detect significant normalised count
         differences of opposed sign at each DNA strand (peak-pairs).
-        Irreproducible discovery rate for overlapping peak-pairs across
+        Irreproducible discovery rate (IDR) for overlapping peak-pairs across
         biological replicates is estimated using the package 'idr'.
 Depends: R (>= 2.10.0), S4Vectors, IRanges
 Maintainer: Pedro Madrigal <bioinformatics.engineer@gmail.com>

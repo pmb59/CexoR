@@ -3,7 +3,7 @@ exportPattern("^[^\\.]")
 
 import(S4Vectors)
 import(GenomicRanges)
-importFrom(IRanges,IRanges,RangedData,RangesList,colnames,"colnames<-",coverage,mean)
+importFrom(IRanges,IRanges,RangesList,colnames,"colnames<-",coverage,mean)
 importFrom(GenomeInfoDb,seqlengths,"seqlengths<-")
 importFrom(Rsamtools,ScanBamParam,scanBam,BamViews,BamFileList,scanBamFlag)
 importFrom(rtracklayer,export.bedGraph)
