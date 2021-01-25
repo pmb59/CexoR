@@ -1,5 +1,5 @@
 Package: CexoR
-Version: 1.29.1
+Version: 1.29.2
 Date: 2020-11-05
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
@@ -19,3 +19,4 @@ License: Artistic-2.0 | GPL-2 + file LICENSE
 LazyLoad: yes
 LazyData: yes
 biocViews: Transcription, Genetics, Sequencing
+PackageStatus: Deprecated
