@@ -40,7 +40,7 @@ The internal functions \code{pskellam} and \code{pskellam.sp} from the Jerry W. 
 
 \references{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. EMBnet.journal  21: e837.  }
 
-\author{ Pedro Madrigal, \email{bioinformatics.engineer@gmail.com} }
+\author{ Pedro Madrigal, \email{pmadrigal@ebi.ac.uk} }
 
 \seealso{ \code{\link{CexoR-package}} }
 

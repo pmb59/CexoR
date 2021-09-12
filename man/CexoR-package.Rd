@@ -9,8 +9,8 @@
 \tabular{ll}{
 Package: \tab CexoR\cr
 Type: \tab Package\cr
-Version: \tab 1.19.3\cr
-Date: \tab 2018-07-03\cr
+Version: \tab 1.19.4\cr
+Date: \tab 2021-07-03\cr
 License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
 LazyLoad: \tab yes\cr
 }
@@ -19,7 +19,7 @@ LazyLoad: \tab yes\cr
 \author{
 Pedro Madrigal,
 
-Maintainer: Pedro Madrigal \email{bioinformatics.engineer@gmail.com}
+Maintainer: Pedro Madrigal \email{pmadrigal@ebi.ac.uk}
 
 }
 \references{ Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. EMBnet.journal  21: e837. \cr 
