@@ -1,6 +1,6 @@
 Package: CexoR
-Version: 1.31.0
-Date: 2020-11-05
+Version: 1.31.1
+Date: 2021-09-11
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
         in ChIP-exo replicates
@@ -12,7 +12,7 @@ Description: Strand specific peak-pair calling in ChIP-exo replicates.
         Irreproducible discovery rate (IDR) for overlapping peak-pairs across
         biological replicates is estimated using the package 'idr'.
 Depends: R (>= 2.10.0), S4Vectors, IRanges
-Maintainer: Pedro Madrigal <bioinformatics.engineer@gmail.com>
+Maintainer: Pedro Madrigal <pmadrigal@ebi.ac.uk>
 Imports: Rsamtools, GenomeInfoDb, GenomicRanges, rtracklayer, idr, RColorBrewer, genomation
 Suggests: RUnit, BiocGenerics, BiocStyle
 License: Artistic-2.0 | GPL-2 + file LICENSE
