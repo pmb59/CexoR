@@ -15,7 +15,7 @@ test_cexor <- function() {
 	#check that the example data outputs a GRanges with 13 ranges 
     checkEquals(length(out$bindingEvents), 13)
 
-        #check that if minimal input is not introduced the package recognizes an error situation
+    #check that if minimal input is not introduced the package recognizes an error situation
 	#bam
 	checkException(cexor(bam=c(), chrN="chr2", chrL=1e6, N=3e4))
 	#chrN

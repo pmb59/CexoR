@@ -23,7 +23,6 @@ N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
   \item{sigma}{ A starting value for the standard deviation of the reproducible component (see 'idr' package).}
   \item{rho}{ A starting value for the correlation coefficient of the reproducible component (see 'idr' package).}
   \item{prop}{ A starting value for the proportion of reproducible component (see 'idr' package).}
-
   
 }
 
@@ -46,21 +45,20 @@ The internal functions \code{pskellam} and \code{pskellam.sp} from the Jerry W. 
 
 \examples{
 
-## hg19. chr2:1-1,000,000. CTCF data from Rhee and Pugh (2011)
+  ## hg19. chr2:1-1,000,000. CTCF data from Rhee and Pugh (2011)
+  owd <- setwd(tempdir())
 
-owd <- setwd(tempdir())
+  rep1 <- "CTCF_rep1_chr2_1-1e6.bam"
+  rep2 <- "CTCF_rep2_chr2_1-1e6.bam"
+  rep3 <- "CTCF_rep3_chr2_1-1e6.bam"
+  r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
+  r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
+  r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
 
-rep1 <- "CTCF_rep1_chr2_1-1e6.bam"
-rep2 <- "CTCF_rep2_chr2_1-1e6.bam"
-rep3 <- "CTCF_rep3_chr2_1-1e6.bam"
-r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
-r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
-r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
+  chipexo <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
 
-chipexo <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+  plotcexor(bam=c(r1,r2,r3), peaks=chipexo, EXT=500)
 
-plotcexor(bam=c(r1,r2,r3), peaks=chipexo, EXT=500)
-
-setwd(owd)
+  setwd(owd)
 
 }

@@ -19,7 +19,6 @@ plotcexor <- function(bam, peaks, EXT=500){
     sm[[j]]  <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=0,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=NA)))
     smF[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=FALSE)))
     smR[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=TRUE)))
-    
   }
   
   #plot Ylim 
@@ -44,7 +43,6 @@ plotcexor <- function(bam, peaks, EXT=500){
     if (j!=1){
       points(L,colMeans(smF[[j]],na.rm=TRUE),type="l", col="red", lwd=1, lty=j) 
       points(L,colMeans(smR[[j]],na.rm=TRUE),type="l", col="blue", lwd=1, lty=j)   
-      
     }
     
   }
@@ -56,7 +54,6 @@ plotcexor <- function(bam, peaks, EXT=500){
   for (j in 1:N){
     if (j==1) plot(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2, frame.plot=F, xlab="Distance to \nbinding centre (bp)", ylab="Average ChIP-exo reads", ylim=c(0,YMAX))
     if (j!=1) points(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2)
-    
   }
   abline(v=0, lty=2)
   legend("topright", col=colo, legend=paste("rep", 1:N), bty="n", lty=1, lwd=2)

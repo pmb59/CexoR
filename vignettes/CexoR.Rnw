@@ -1,11 +1,8 @@
 %\VignetteIndexEntry{CexoR Vignette }
 %\VignetteDepends{}
-%\VignetteKeywords{Visualization,ChIPseq,Transcription,Genetics}
+%\VignetteKeywords{Visualization,ChIPseq,Transcription,Genetics,Coverage,ChIPSeq}
 %\VignettePackage{CexoR}
 \documentclass{article}
-
-
-
 
 <<style, eval=TRUE, echo=FALSE, results=tex>>=
 BiocStyle::latex()
@@ -15,15 +12,15 @@ BiocStyle::latex()
 \begin{document}
 
 \title{\Biocpkg{ CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
-\date{Last Modified: September, 2021. Compiled: \today}
-%\author{Pedro Madrigal\footnote{dnaseiseq@gmail.com}}
+\date{Last Modified: October, 2021. Compiled: \today}
+%\author{Pedro Madrigal\footnote{ pmadrigal@ebi.ac.uk }}
 \author{Pedro Madrigal}
 
 
 \maketitle
 
 \begin{center}
-University of Cambridge, UK\\
+EMBL-EBI, UK\\
 \end{center}
 
 
@@ -38,7 +35,8 @@ options(prompt="R> ")
 
  
 \section{Citation}
-Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. \href{http://dx.doi.org/10.14806/ej.21.0.837}{http://dx.doi.org/10.14806/ej.21.0.837}.
+Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. 
+\href{http://dx.doi.org/10.14806/ej.21.0.837}{http://dx.doi.org/10.14806/ej.21.0.837}.
 
 \section{Introduction}
 For its unprecedented level of resolution, chromatin immunoprecipitation combined with lambda exonuclease digestion followed by sequencing (ChIP-exo) is a potential candidate to replace ChIP-seq as the standard approach for high-confidence mapping of protein-DNA interactions. Numerous algorithms have been developed for peak calling in ChIP-seq data. However, adjusting the statistical models to ChIP-exo making use of its strand-specificity can improve
@@ -56,7 +54,7 @@ We downloaded the 3 replicates of human CTCF ChIP-exo data from GEO (SRA044886) 
 
 
 \begin{small}
-<<Call reproducible peak-pairs in ChIP-exo replicates, eval=FALSE>>=
+<<Call reproducible peak-pairs in ChIP-exo replicates, eval=TRUE>>=
 options(width=60)
 ## hg19. chr2:1-1,000,000
 
@@ -111,7 +109,7 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 \end{itemize}
 
 \section{References}
-The author wishes to acknowledge Christoph Sebastian Borlin, Md. Abul Hassan Samee, Vivek Rexwal and Sudhir Jadhao for helpful comments.
+The author wishes to acknowledge Christoph Sebastian Borlin, Md. Abul Hassan Samee, Vivek Rexwal and Sudhir Jadhao for their feedback.
 
 
 \section{Details}

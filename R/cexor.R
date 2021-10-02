@@ -1,7 +1,6 @@
 
 cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01, N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
 {
-
   options(digits=10)
 
   # Number of treatment samples
@@ -11,7 +10,6 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
   #LN <- length(chrN)
 
   # Read treatment M samples in BAM format (M biological replicates)
-
   listLen <- 0
   SampleCovPlus <- list()
   SampleCovMinus <- list()
@@ -35,11 +33,11 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
               names(SamplelstPlus) <- names(SampleBam[[1]])
               SampledfPlus <- do.call("DataFrame", SamplelstPlus)
               # correction for reverse strands
-              SampledfPlus$pos[which(SampledfPlus$strand==1)] <- SampledfPlus$pos[which(SampledfPlus$strand==1)] - 1
+              SampledfPlus$pos[which(SampledfPlus$strand=='+')] <- SampledfPlus$pos[which(SampledfPlus$strand=='+')] - 1
               # Modify read length (exonuclease stop sites, 1bp)
               SampledfPlus$qwidth <- 1
               # strand selection
-              SampledfPlus <- SampledfPlus[which(SampledfPlus$strand==1),]
+              SampledfPlus <- SampledfPlus[which(SampledfPlus$strand=='+'),]
               SampleCovPlus[[listLen]]  <- coverage(IRanges(SampledfPlus[["pos"]], width = SampledfPlus[["qwidth"]]))
               if (length(SampleCovPlus[[listLen]])   < chrL[i] ) { SampleCovPlus[[listLen]]   <- c(SampleCovPlus[[listLen]],rep(0,chrL[i] - length(SampleCovPlus[[listLen]]) ) )  }
               if (length(SampleCovPlus[[listLen]])   > chrL[i] ) { SampleCovPlus[[listLen]]   <-  SampleCovPlus[[listLen]][1:chrL[i]]     }
@@ -50,11 +48,11 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
               names(SamplelstMinus) <- names(SampleBam[[1]])
               SampledfMinus  <- do.call("DataFrame", SamplelstMinus )
               # correction for reverse strands
-              SampledfMinus$pos[which(SampledfMinus$strand==2)] <- SampledfMinus$pos[which(SampledfMinus$strand==2)] -1 + SampledfMinus$qwidth[which(SampledfMinus$strand==2)]
+              SampledfMinus$pos[which(SampledfMinus$strand=='-')] <- SampledfMinus$pos[which(SampledfMinus$strand=='-')] -1 + SampledfMinus$qwidth[which(SampledfMinus$strand=='-')]
               # Modify read length  (exonuclease stop sites, 1bp)
               SampledfMinus$qwidth <- 1
               # strand selection
-              SampledfMinus <- SampledfMinus[which(SampledfMinus$strand==2),]
+              SampledfMinus <- SampledfMinus[which(SampledfMinus$strand=='-'),]
               SampleCovMinus[[listLen]]  <- coverage(IRanges(SampledfMinus[["pos"]], width = SampledfMinus[["qwidth"]]))
               if (length(SampleCovMinus[[listLen]])   < chrL[i] ) { SampleCovMinus[[listLen]]   <- c(SampleCovMinus[[listLen]],rep(0,chrL[i] - length(SampleCovMinus[[listLen]]) ) )  }
               if (length(SampleCovMinus[[listLen]])   > chrL[i] ) { SampleCovMinus[[listLen]]   <-  SampleCovMinus[[listLen]][1:chrL[i]]     }

@@ -11,11 +11,9 @@ Description: Strand specific peak-pair calling in ChIP-exo replicates.
         differences of opposed sign at each DNA strand (peak-pairs).
         Irreproducible discovery rate (IDR) for overlapping peak-pairs across
         biological replicates is estimated using the package 'idr'.
-Depends: R (>= 2.10.0), S4Vectors, IRanges
+Depends: R (>= 4.0.0), S4Vectors, IRanges
 Maintainer: Pedro Madrigal <pmadrigal@ebi.ac.uk>
 Imports: Rsamtools, GenomeInfoDb, GenomicRanges, rtracklayer, idr, RColorBrewer, genomation
 Suggests: RUnit, BiocGenerics, BiocStyle, knitr, rmarkdown
 License: Artistic-2.0 | GPL-2 + file LICENSE
-LazyLoad: yes
-LazyData: yes
 biocViews: Transcription, Genetics, Sequencing, Coverage, ChIPSeq
