@@ -1,10 +1,10 @@
 Package: CexoR
-Version: 1.31.1
-Date: 2021-09-11
+Version: 1.31.2
+Date: 2021-10-02
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
         in ChIP-exo replicates
-Author: Pedro Madrigal <bioinformatics.engineer@gmail.com>
+Author: Pedro Madrigal <pmadrigal@ebi.ac.uk>
 Description: Strand specific peak-pair calling in ChIP-exo replicates.
         The cumulative Skellam distribution function (package
         'skellam') is used to detect significant normalised count
@@ -18,5 +18,4 @@ Suggests: RUnit, BiocGenerics, BiocStyle, knitr, rmarkdown
 License: Artistic-2.0 | GPL-2 + file LICENSE
 LazyLoad: yes
 LazyData: yes
-biocViews: Transcription, Genetics, Sequencing
-PackageStatus: Deprecated
+biocViews: Transcription, Genetics, Sequencing, Coverage, ChIPSeq
