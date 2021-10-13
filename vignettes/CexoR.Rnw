@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{CexoR Vignette }
+%\VignetteIndexEntry{ CexoR Vignette }
 %\VignetteDepends{}
 %\VignetteKeywords{Visualization,ChIPseq,Transcription,Genetics,Coverage,ChIPSeq}
 %\VignettePackage{CexoR}
@@ -8,7 +8,6 @@
 BiocStyle::latex()
 @
 
-
 \begin{document}
 
 \title{\Biocpkg{ CexoR }: An R package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates}
@@ -16,16 +15,13 @@ BiocStyle::latex()
 %\author{Pedro Madrigal\footnote{ pmadrigal@ebi.ac.uk }}
 \author{Pedro Madrigal}
 
-
 \maketitle
 
 \begin{center}
 EMBL-EBI, UK\\
 \end{center}
 
-
 \tableofcontents
-
 
 <<setup, echo=FALSE, results=hide>>=
 options(width=200)
@@ -33,7 +29,6 @@ options(continue=" ")
 options(prompt="R> ")
 @
 
- 
 \section{Citation}
 Madrigal P (2015) CexoR: an R/Bioconductor package to uncover high-resolution protein-DNA interactions in ChIP-exo replicates. \textbf{EMBnet.journal} 21, e837. 
 \href{http://dx.doi.org/10.14806/ej.21.0.837}{http://dx.doi.org/10.14806/ej.21.0.837}.
@@ -48,10 +43,8 @@ Lambda exonuclease stop site
 
 More information can be found in Madrigal (2015).
 
-
 \section{Example}
 We downloaded the 3 replicates of human CTCF ChIP-exo data from GEO (SRA044886) (Rhee and Pugh, 2011), and aligned the reads to the human reference genome (hg19) using Bowtie 1.0.0. Reads not mapping uniquely were discarded. We can search reproducible binding events between peak-pairs in the first million bp of Chr2 in the 3 biological replicates by:
-
 
 \begin{small}
 <<Call reproducible peak-pairs in ChIP-exo replicates, eval=TRUE>>=
@@ -88,7 +81,6 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 @
 \end{small}
 
-
 \textbf{Important notes}: 
 \begin{itemize}
 \item For the correct estimation of the IDR (Li et al., 2011) peak-pair calling should be relaxed (e.g., $p$-value=1e-3, or smaller depending on the sequencing depth), enabling the noise component be present in the data and therefore allowing the peak-pairs to be separated into a reproducible and an irreproducible groups. In the example shown above, as the dataset is very small and peaks are highly reproducible, IDR in the overlapped peak-pairs across the 3 replicates is zero. 
@@ -96,7 +88,6 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 \item For more information about using IDR in high-throughput sequencing datasets see Land et al. (2012) and Bailey et al. (2013), or the mathematical description in Li et al. (2011).
 
 \end{itemize}
-
 
 \section{References}
 \begin{itemize}
@@ -110,7 +101,6 @@ plotcexor(bam=c(r1,r2,r3), peaks=peak_pairs, EXT=500)
 
 \section{References}
 The author wishes to acknowledge Christoph Sebastian Borlin, Md. Abul Hassan Samee, Vivek Rexwal and Sudhir Jadhao for their feedback.
-
 
 \section{Details}
 
