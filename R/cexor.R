@@ -17,7 +17,7 @@ cexor <- function( bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.0
   totalSum <- c()
 
   # Read BAM files
-  for (j in 1:NT){
+  for (j in seq(from=1, to=NT, by=1) ){
 
       for (i in 1:LL){
               listLen <-  listLen + 1
@@ -107,8 +107,8 @@ cexor <- function( bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.0
 
   # Get paired peaks at each sample
   # using the Skellam cumulative distribution function
-  pairedPeaks   <- list()
-  listLen <-0
+  pairedPeaks  <- list()
+  listLen <- 0
   chrLwithPeaks <- list()
 
   for (w in 1:NT){
@@ -151,18 +151,18 @@ cexor <- function( bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.0
          		score[iMinus] <- pskellam(q=k[iMinus]-1, lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = TRUE, log.p = FALSE)
 
          		# p-value threshold
-         		positions  <- which(score <= p)   # score has peak p-values, F(x)
+         		positions <- which(score <= p)   # score has peak p-values, F(x)
 
          		# which ones are close to each other
-         		maxD = dpeaks[2]  #150 #30
-         		minD = dpeaks[1]  #0   #8
+         		maxD <-  dpeaks[2]  #150 #30
+         		minD <-  dpeaks[1]  #0   #8
 
          		filteredScore <- data.frame()
-         		idx=0
+         		idx <- 0
 
          		if (length(positions)>1){
               		# keep just Max and Min in a region of length dpeaks[2]+1
-              		W = dpeaks[2]+1   #151
+              		W <- dpeaks[2]+1   #151
               		new_positions <- c()
               		for (ww in 1:length(positions)){
                 		if ( positions[ww]-W < ceiling( W)  ){  vectorAux <- k[1:(positions[ww]+W) ]  }
