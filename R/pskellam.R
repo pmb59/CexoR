@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------
-#pskellam.R and pskellam.sp.R within directory R/ are under GPL(≥2) license
+# pskellam.R and pskellam.sp.R within directory R/ are under GPL(≥2) license
 #--------------------------------------------------------------------------
 #    skellam: Skellam distribution. 
 #
@@ -18,7 +18,7 @@
 
 
 pskellam <- function(q, lambda1, lambda2=lambda1, lower.tail=TRUE, log.p=FALSE){
- # CDF of Skellam distriubition (difference of Poissons)
+    # CDF of Skellam distriubition (difference of Poissons)
     if (missing(q)|missing(lambda1)) stop("first 2 arguments are required")
     lambdas <- c(lambda1,lambda2)
     oops <- !(is.finite(lambdas)&(lambdas>=0))
@@ -28,9 +28,9 @@ pskellam <- function(q, lambda1, lambda2=lambda1, lower.tail=TRUE, log.p=FALSE){
         lambda1 <- lambdas[1:length(lambda1)]
         lambda2 <- lambdas[(length(lambda1)+1):length(lambdas)]
     }
-   # CDF is a step function, so convert to integer values without warning
+    # CDF is a step function, so convert to integer values without warning
     x <- floor(q)
-   # make all args the same length (for subsetting)
+    # make all args the same length (for subsetting)
     lens <- c(length(x),length(lambda1),length(lambda2))
     len <- max(lens)
     if(len>min(lens)) {
@@ -39,7 +39,7 @@ pskellam <- function(q, lambda1, lambda2=lambda1, lower.tail=TRUE, log.p=FALSE){
         lambda1 <- rep(lambda1,length.out=len)
         lambda2 <- rep(lambda2,length.out=len)
     }
-   # different formulas for negative & nonnegative x (zero lambda is OK)
+    # different formulas for negative & nonnegative x (zero lambda is OK)
     neg <- (x< 0)&(!is.nan(lambda1))&(!is.nan(lambda2))
     pos <- (x>=0)&(!is.nan(lambda1))&(!is.nan(lambda2))
     ret <- rep(NaN,length.out=len)
