@@ -8,13 +8,13 @@ plotcexor <- function( bam, peaks, EXT=500 ){
   start(peaks) <- start(peaks) - EXT
   end(peaks)   <- end(peaks)   + EXT
   # genomation
-  nBins = (2*EXT)+1
-  scaleData=FALSE
+  nBins <- (2*EXT)+1
+  scaleData <- FALSE
   # read bam
   sm <- list()
   smF <- list()
   smR <- list()
-  for (j in 1:N){
+  for (j in seq(from=1, to=N, by=1) ){
     sm[[j]]  <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=0,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=NA)))
     smF[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=FALSE)))
     smR[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=TRUE)))
@@ -33,7 +33,7 @@ plotcexor <- function( bam, peaks, EXT=500 ){
   L <- -EXT:EXT
   
   # upper panel
-  for (j in 1:N){
+  for (j in seq(from=1, to=N, by=1) ){
     ym <- max(YMAXF,YMAXR)
     if (j==1){
       plot(L,colMeans(smF[[j]],na.rm=TRUE),type="l", col="red", lwd=1, frame.plot=F, xlab="Distance to \nbinding centre (bp)", ylab=expression(paste("Average ",lambda," exonuclease stop sites")), ylim=c(0,ym), lty=j)
@@ -50,7 +50,7 @@ plotcexor <- function( bam, peaks, EXT=500 ){
   legend("topright", col="black", legend=paste("rep", 1:N), lty=1:N, bty="n", lwd=1)
   
   # lower panel
-  for (j in 1:N){
+  for (j in seq(from=1, to=N, by=1) ){
     if (j==1) plot(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2, frame.plot=F, xlab="Distance to \nbinding centre (bp)", ylab="Average ChIP-exo reads", ylim=c(0,YMAX))
     if (j!=1) points(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2)
   }
