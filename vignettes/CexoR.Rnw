@@ -113,5 +113,3 @@ sessionInfo()
 \end{small} 
 
 \end{document}
-
-
