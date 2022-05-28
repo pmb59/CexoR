@@ -1,17 +1,16 @@
-
-plotcexor <- function(bam, peaks, EXT=500){  
+plotcexor <- function( bam, peaks, EXT=500 ){  
   
   N <- length(bam)
   colo <- colorRampPalette(brewer.pal(N,"Set2"))(N)
   
-  #extend peak centre Upstream and Dowstream EXT bp
+  # extend peak centre Upstream and Dowstream EXT bp
   peaks <- peaks$bindingCentres 
   start(peaks) <- start(peaks) - EXT
   end(peaks)   <- end(peaks)   + EXT
-  #Genomation
+  # genomation
   nBins = (2*EXT)+1
   scaleData=FALSE
-  #Read bam
+  # read bam
   sm <- list()
   smF <- list()
   smR <- list()
@@ -20,8 +19,8 @@ plotcexor <- function(bam, peaks, EXT=500){
     smF[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=FALSE)))
     smR[[j]] <- ScoreMatrixBin(target = bam[j], bin.num = nBins, windows = peaks, type="bam",strand.aware = TRUE, extend=1,rpm=F, param = ScanBamParam(which=reduce(peaks, ignore.strand=TRUE), flag=scanBamFlag(isMinusStrand=TRUE)))
   }
-  
-  #plot Ylim 
+
+  # plot Ylim 
   YMAX <-0; YMAXF <-0; YMAXR <-0;
   for (j in 1:N){
     YMAX  <- max(YMAX, colMeans(sm[[j]],na.rm=TRUE) )
@@ -33,7 +32,7 @@ plotcexor <- function(bam, peaks, EXT=500){
  
   L <- -EXT:EXT
   
-  #up panel
+  # upper panel
   for (j in 1:N){
     ym <- max(YMAXF,YMAXR)
     if (j==1){
@@ -50,7 +49,7 @@ plotcexor <- function(bam, peaks, EXT=500){
   legend("topleft", text.col=c("red","blue"), legend=c("+ strand","- strand"), bty="n")
   legend("topright", col="black", legend=paste("rep", 1:N), lty=1:N, bty="n", lwd=1)
   
-  #lower panel
+  # lower panel
   for (j in 1:N){
     if (j==1) plot(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2, frame.plot=F, xlab="Distance to \nbinding centre (bp)", ylab="Average ChIP-exo reads", ylim=c(0,YMAX))
     if (j!=1) points(L,colMeans(sm[[j]],na.rm=TRUE),type="l", col=colo[j], lwd=2)
@@ -58,5 +57,4 @@ plotcexor <- function(bam, peaks, EXT=500){
   abline(v=0, lty=2)
   legend("topright", col=colo, legend=paste("rep", 1:N), bty="n", lty=1, lwd=2)
   
-} 
-
+}
