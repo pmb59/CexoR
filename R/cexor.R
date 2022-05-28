@@ -1,5 +1,5 @@
 
-cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01, N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7)
+cexor <- function( bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01, N=5e6, bedfile=TRUE, mu=2.6, sigma=1.3, rho=0.8, prop=0.7 )
 {
   options(digits=10)
 
@@ -16,7 +16,7 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
   sumCovPlusMinus <- c()
   totalSum <- c()
 
-  ##Read BAM files
+  # Read BAM files
   for (j in 1:NT){
 
       for (i in 1:LL){
@@ -62,22 +62,19 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
               sumCovPlusMinus[listLen]  <- sum(SampleCovPlus[[listLen]])  +  sum(SampleCovMinus[[listLen]])
 
               rm(SampleBam,SamplelstMinus,SampledfMinus,param,what,which)
-
       }
 
-      #get total lambda exonuclease cuts at each sample
+      # get total lambda exonuclease cuts at each sample
       totalSum[j] <- sum(sumCovPlusMinus[(((j-1)*LL) + 1):(j*LL)])
-
   }
 
  rm(i,j)
  rm(sumCovPlusMinus)
  
  
-##############################################################################
-# Normalization
-# To the smallest sample  - to make the samples 'comparable'
-# and estimation of Skellam Lambda1 and Lambda2 for each sample
+ # Normalization
+ # To the smallest sample  - to make the samples 'comparable'
+ # and estimation of Skellam Lambda1 and Lambda2 for each sample
  listLen <- 0
  meanCovPlus <- c()
  meanCovMinus <- c()
@@ -90,12 +87,12 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
 
       for (i in 1:LL){
               listLen <-  listLen + 1
-              SampleCovPlus[[listLen]]   <- round( factorNorm[j] * SampleCovPlus[[listLen]]   )      #it is an approximation
-              SampleCovMinus[[listLen]]  <- round( factorNorm[j] * SampleCovMinus[[listLen]]  )      #it is an approximation
+              SampleCovPlus[[listLen]]   <- round( factorNorm[j] * SampleCovPlus[[listLen]]   )      # it is an approximation
+              SampleCovMinus[[listLen]]  <- round( factorNorm[j] * SampleCovMinus[[listLen]]  )      # it is an approximation
               meanCovPlus[listLen]  <- mean(SampleCovPlus[[listLen]])
               meanCovMinus[listLen] <- mean(SampleCovMinus[[listLen]])
       }
-      #estimating Poisson means of the distributions
+      # estimating Poisson means of the distributions
       lambda1_ini <- sum((chrL/sum(chrL))  * meanCovPlus[(((j-1)*LL) + 1):(j*LL)])
       lambda2_ini <- sum((chrL/sum(chrL))  * meanCovMinus[(((j-1)*LL) + 1):(j*LL)])
 
@@ -107,14 +104,12 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
 
    }
 
-##############################################################################
+
   # Get paired peaks at each sample
   # using the Skellam cumulative distribution function
-
   pairedPeaks   <- list()
   listLen <-0
   chrLwithPeaks <- list()
-
 
   for (w in 1:NT){
       	chrLwithPeaksCount <- 0        
@@ -142,23 +137,23 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
             	sample_forward <- as.integer(SampleCovPlus[[listLen]] [  lFrame ])
             	sample_reverse <- as.integer(SampleCovMinus[[listLen]][  lFrame ])
 
-         		#Difference of exonuclease start sites at each strand
+         		# Difference of exonuclease start sites at each strand
          		k <- as.integer(sample_forward - sample_reverse)
 
          		rm(sample_forward,sample_reverse)
 
          		# Skellam cumulative distribution function
-         		#Calculate p-value (two-sided test)
+         		# Calculate p-value (two-sided test)
          		score <- c()
          		iPlus  <- which(k>=0)   # '='can be at both
          		iMinus <- which(k<0)
          		score[iPlus]  <- pskellam(q=k[iPlus],    lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = FALSE, log.p = FALSE)
          		score[iMinus] <- pskellam(q=k[iMinus]-1, lambda1= lambda1[w], lambda2 = lambda2[w], lower.tail = TRUE, log.p = FALSE)
 
-         		#P-VALUE threshold
-         		positions  <- which(score <= p)   #score has peak p-values, F(x)
+         		# p-value threshold
+         		positions  <- which(score <= p)   # score has peak p-values, F(x)
 
-         		#Which ones are close to each other
+         		# which ones are close to each other
          		maxD = dpeaks[2]  #150 #30
          		minD = dpeaks[1]  #0   #8
 
@@ -166,7 +161,7 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
          		idx=0
 
          		if (length(positions)>1){
-              		#Keep just Max and Min in a region of length dpeaks[2]+1
+              		# keep just Max and Min in a region of length dpeaks[2]+1
               		W = dpeaks[2]+1   #151
               		new_positions <- c()
               		for (ww in 1:length(positions)){
@@ -175,7 +170,7 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
                    		if ( positions[ww]+W > N-floor(W)  ){  vectorAux <- k[(positions[ww]-W):N ]  }
                    		maximo <- max(vectorAux)
                    		minimo <- min(vectorAux)
- #                  		print(ww)
+  #               		print(ww)
   #                 		print(maximo)
   #                 		print(minimo)
                    		if( k[positions[ww]]==maximo && maximo >0 ){ new_positions <- c( new_positions,positions[ww]) }
@@ -199,9 +194,9 @@ cexor <- function(bam, chrN, chrL, p=1e-9, dpeaks=c(0,150), dpairs=100, idr=0.01
 		                   		filteredScore[idx,4] <- lFrame[positions[j]]-lFrame[positions[j-1]]
 		                   		filteredScore[idx,5] <- signif(score[positions[j-1]], digits=30)
 		                   		filteredScore[idx,6] <- signif(score[positions[j]] , digits=30)
-				           		pvalVector <- c(score[positions[j-1]] , score[positions[j]])
-				   		   		filteredScore[idx,7] <- sum(pvalVector)  #pchisq(-2*sum(log(pvalVector)), df=2*length(pvalVector), lower=FALSE )
-			           	   		filteredScore[idx,8] <- -1*log10(filteredScore[idx,7])
+				           	pvalVector <- c(score[positions[j-1]] , score[positions[j]])
+				   		filteredScore[idx,7] <- sum(pvalVector)  #pchisq(-2*sum(log(pvalVector)), df=2*length(pvalVector), lower=FALSE )
+			           	   	filteredScore[idx,8] <- -1*log10(filteredScore[idx,7])
 			        		}
 		        	 	}
         	 		}
@@ -244,8 +239,6 @@ repl <- list()
 
 for (w in 1:NT){
 
-
-
       repl[[w]] <- GRanges(seqnames=pairedPeaks[[w]]$chr,
                   ranges=IRanges(pairedPeaks[[w]]$start, end=pairedPeaks[[w]]$end),
                   score=pairedPeaks[[w]]$log10.pval.binding.event)
@@ -256,11 +249,7 @@ for (w in 1:NT){
 }
 
 
-
-
-#print(repl[[1]])
-
-#(intersect) final list of chip-exo peaks
+# (intersect) final list of chip-exo peaks
 finalset  <- repl[[1]]
 
 for (w in 2:NT){
@@ -271,11 +260,9 @@ for (w in 2:NT){
 
        finalset <- trim(finalset, use.names=TRUE)
        
-#print(finalset)
 
-#prepare matrix MM for IDR assessment
+# prepare matrix MM for IDR assessment
 MM <- matrix(data = NA, nrow = length(finalset), ncol = NT)
-
 
 for (w in 1:NT){
     for (i in 1: length(finalset) ){
@@ -283,33 +270,28 @@ for (w in 1:NT){
     }
 }
 
-#send matrix MM to IDR analysis
+# send matrix MM to IDR analysis
 #  mu <- 2.6
 #  sigma <- 1.3
 #  rho <- 0.8
 #  p <- 0.7
 
- #library(idr)
- #x = a m by n numeric matrix, where m= num of replicates, n=num of observations. Numerical values representing the significance
- #of the observations, where signals are expected to have large values, for example, -log(p-value).
+ # library(idr)
+ # x = a m by n numeric matrix, where m= num of replicates, n=num of observations. Numerical values representing the significance
+ # of the observations, where signals are expected to have large values, for example, -log(p-value).
  idr.out <- est.IDR(x=MM, mu, sigma, rho, prop, eps=0.00001)
  #idr.out$IDR
 
-# #FINAL  sites
+# FINAL  sites
 # values(finalset) <- idr.out$IDR
  passingIDR <- which(idr.out$IDR< idr)
 
-
-
-################################################################
 # prepare final GRanges
-
 PVALMATRIX=10^-MM
 
 MM2 <- as.data.frame(MM)
 colnames(MM2) <- paste(paste("rep", as.character(1:NT), sep=""), "neg.log10pvalue",sep=".")
 # get p-values
-
 
 
 
@@ -359,15 +341,7 @@ for (i in 1:dim(PVALMATRIX)[1]) {
     export.bedGraph(object=finalsetcentres[passingIDR], con=paste("cexor_peak_centres_IDR_",".bed", sep=as.character(idr)))
  }
 
-
-
   return(list( bindingEvents=finalset[passingIDR], bindingCentres =finalsetcentres[passingIDR],  pairedPeaksRepl = repl ))
 
-
 }
-
-
-
-
-
 
