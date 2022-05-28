@@ -9,8 +9,8 @@
     \tabular{ll}{
         Package: \tab CexoR\cr
         Type: \tab Package\cr
-        Version: \tab 1.31.2\cr
-        Date: \tab 2021-10-02\cr
+        Version: \tab 1.35.1\cr
+        Date: \tab 2022-05-28\cr
         License: \tab Artistic-2.0 | GPL-2 + file LICENSE\cr
         LazyLoad: \tab yes\cr
     }
@@ -29,18 +29,18 @@ Rhee HS, Pugh BF (2011) Comprehensive genome-wide protein-DNA interactions detec
 \examples{
 
     ## hg19. chr2:1-1,000,000. CTCF data from Rhee and Pugh (2011)
-    owd <- setwd(tempdir())
+    owd <- setwd( tempdir() )
 
     rep1 <- "CTCF_rep1_chr2_1-1e6.bam"
     rep2 <- "CTCF_rep2_chr2_1-1e6.bam"
     rep3 <- "CTCF_rep3_chr2_1-1e6.bam"
-    r1 <- system.file("extdata", rep1, package="CexoR",mustWork = TRUE)
-    r2 <- system.file("extdata", rep2, package="CexoR",mustWork = TRUE)
-    r3 <- system.file("extdata", rep3, package="CexoR",mustWork = TRUE)
+    r1 <- system.file( "extdata", rep1, package="CexoR",mustWork = TRUE )
+    r2 <- system.file( "extdata", rep2, package="CexoR",mustWork = TRUE )
+    r3 <- system.file( "extdata", rep3, package="CexoR",mustWork = TRUE )
 
-    chipexo <- cexor(bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4)
+    chipexo <- cexor( bam=c(r1,r2,r3), chrN="chr2", chrL=1e6, idr=0.01, p=1e-12, N=3e4 )
 
-    plotcexor(bam=c(r1,r2,r3), peaks=chipexo, EXT=500)
+    plotcexor( bam=c(r1,r2,r3), peaks=chipexo, EXT=500 )
 
-    setwd(owd)
+    setwd( owd )
 }
