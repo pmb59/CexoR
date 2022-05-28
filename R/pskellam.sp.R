@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------
-#pskellam.R and pskellam.sp.R within directory R/ are under GPL(≥2) license
+# pskellam.R and pskellam.sp.R within directory R/ are under GPL(≥2) license
 #--------------------------------------------------------------------------
 #    skellam: Skellam distribution. 
 #
