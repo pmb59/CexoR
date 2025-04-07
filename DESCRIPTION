@@ -1,6 +1,6 @@
 Package: CexoR
-Version: 1.35.1
-Date: 2022-05-28
+Version: 1.35.3
+Date: 2025-04-07
 Type: Package
 Title: An R package to uncover high-resolution protein-DNA interactions
         in ChIP-exo replicates
@@ -23,3 +23,5 @@ Imports: Rsamtools, GenomeInfoDb, GenomicRanges, rtracklayer, idr, RColorBrewer,
 Suggests: RUnit, BiocGenerics, BiocStyle, knitr, rmarkdown
 License: Artistic-2.0 | GPL-2 + file LICENSE
 biocViews: FunctionalGenomics, Sequencing, Coverage, ChIPSeq, PeakDetection
+URL: https://github.com/pmb59/CexoR
+BugReports: https://github.com/pmb59/CexoR/issues
